@@ -195,7 +195,7 @@ public class ClienteDAO implements IClienteDAO {
     private String getSqlUpdate() {
         StringBuilder sb = new StringBuilder();
         sb.append("UPDATE TB_CLIENTE ");
-        sb.append("SET CODIGO = ?, NOME = ? ");
+        sb.append("SET NOME = ?, CODIGO = ? ");
         sb.append("WHERE ID = ?");
         return sb.toString();
     }

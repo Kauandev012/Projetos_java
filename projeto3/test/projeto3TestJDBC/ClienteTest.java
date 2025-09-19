@@ -80,27 +80,27 @@ public class ClienteTest {
         cliente.setCodigo("01");
         cliente.setNome("Fulano");
         Integer qtd = clienteDAO.casdastrar(cliente);
-        assertTrue(qtd == 1);
+        assertEquals(1, (int) qtd);
 
         Cliente clientes = new Cliente();
         clientes.setCodigo("02");
         clientes.setNome("Fulano2");
         Integer qtd2 = clienteDAO.casdastrar(cliente);
-        assertTrue(qtd2 == 1);
+        assertEquals(1, (int) qtd2);
 
-        List<Cliente> List = clienteDAO.buscarTodos();
-        assertNotNull(List);
-        assertEquals(2, List.size());
+        List<Cliente> list = clienteDAO.buscarTodos();
+        assertNotNull(list);
+        assertEquals(2, list.size());
 
         int countDe1 = 0;
-        for(Cliente c : List){
+        for(Cliente c : list){
             clienteDAO.excluir(c);
             countDe1++;
         }
-        assertEquals(List.size(), countDe1);
+        assertEquals(list.size(), countDe1);
 
-        List = clienteDAO.buscarTodos();
-        assertEquals(List.size(), 0);
+        list = clienteDAO.buscarTodos();
+        assertEquals(0, list.size());
     }
 
     @Test
@@ -111,7 +111,7 @@ public class ClienteTest {
         cliente.setCodigo("01");
         cliente.setNome("Fulano");
         Integer qtd = clienteDAO.casdastrar(cliente);
-        assertTrue(qtd == 1);
+        assertEquals(1, (int) qtd);
 
         Cliente clienteBD =  clienteDAO.buscar("01");
         assertNotNull(clienteBD);
@@ -121,7 +121,7 @@ public class ClienteTest {
         clienteBD.setCodigo("02");
         clienteBD.setNome("fulano nome teste");
         Integer qtd2 = clienteDAO.update(clienteBD);
-        assertTrue(qtd2 == 1);
+        assertEquals(1, (int) qtd2);
 
         Cliente clienteBD1 = clienteDAO.buscar("01");
         assertNull(clienteBD1);

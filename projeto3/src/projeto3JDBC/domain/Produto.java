@@ -5,7 +5,7 @@ public class Produto {
     //variaveis produto
     private Long id;
     private String nome;
-    private Integer quantidade;
+    private Long quantidade;
 
     //get end set
 
@@ -25,11 +25,11 @@ public class Produto {
         this.nome = nome;
     }
 
-    public Integer getQuantidade() {
+    public Long getQuantidade() {
         return quantidade;
     }
 
-    public void setQuantidade(Integer quantidade) {
+    public void setQuantidade(Long quantidade) {
         this.quantidade = quantidade;
     }
 }

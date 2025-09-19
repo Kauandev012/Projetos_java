@@ -15,7 +15,7 @@ public class ProdutoDAO implements IProdutoDAO {
 
     //imolimentados do IProdutoDAO
     @Override
-    public Integer casdastrar(Produto produto) throws Exception {
+    public Long casdastrar(Produto produto) throws Exception {
         Connection connexao = null;
         PreparedStatement stm = null;
         try{
@@ -23,7 +23,7 @@ public class ProdutoDAO implements IProdutoDAO {
             String sql = getSqlInsert();
             stm = connexao.prepareStatement(sql);
             adicionarParametroInsert(stm, produto);
-            return stm.executeUpdate();
+            return (long) stm.executeUpdate();
         }catch (Exception e){
             throw e;
         }finally {
@@ -33,14 +33,14 @@ public class ProdutoDAO implements IProdutoDAO {
 
     @Override
     public Produto buscar(String nome) throws Exception {
-        Connection connection = null;
+        Connection connexao = null;
         PreparedStatement stm = null;
         ResultSet rs = null;
         Produto produto = null;
         try {
-            connection = ConnectionFactory.getConnection();
+            connexao = ConnectionFactory.getConnection();
             String sql = getSqlSelect();
-            stm = connection.prepareStatement(sql);
+            stm = connexao.prepareStatement(sql);
             adicionarParametrosSelect(stm, nome);
             rs = stm.executeQuery();
 
@@ -48,7 +48,7 @@ public class ProdutoDAO implements IProdutoDAO {
                 produto = new Produto();
                 Long id = rs.getLong("ID");
                 String nm = rs.getString("NOME");
-                Integer qd = rs.getInt("QUANTIDADE");
+                Long qd = rs.getLong("QUANTIDADE");
                 produto.setID(id);
                 produto.setNome(nm);
                 produto.setQuantidade(qd);
@@ -56,46 +56,46 @@ public class ProdutoDAO implements IProdutoDAO {
         } catch(Exception e) {
             throw e;
         } finally {
-            closeConnection(connection, stm, rs);
+            closeConnection(connexao, stm, rs);
         }
         return produto;
     }
 
     @Override
-    public Integer excluir(Produto produto) throws Exception {
-        Connection connection = null;
+    public Long excluir(Produto produto) throws Exception {
+        Connection connexao = null;
         PreparedStatement stm = null;
         try {
-            connection = ConnectionFactory.getConnection();
+            connexao = ConnectionFactory.getConnection();
             String sql = getSqlDelete();
-            stm = connection.prepareStatement(sql);
+            stm = connexao.prepareStatement(sql);
             adicionarParametrosDelete(stm, produto);
-            return stm.executeUpdate();
+            return (long) stm.executeUpdate();
         }catch (Exception e){
             throw e;
         }finally {
-            closeConnection(connection, stm, null);
+            closeConnection(connexao, stm, null);
         }
     }
 
     @Override
     public List<Produto> buscarTodos() throws Exception {
-        Connection connection = null;
+        Connection connexao = null;
         PreparedStatement stm = null;
         ResultSet rs = null;
         List<Produto> list = new ArrayList<>();
         Produto produto = null;
         try {
-            connection = ConnectionFactory.getConnection();
+            connexao = ConnectionFactory.getConnection();
             String sql = getSqlSelectAll();
-            stm = connection.prepareStatement(sql);
+            stm = connexao.prepareStatement(sql);
             rs = stm.executeQuery();
 
             while (rs.next()) {
                 produto = new Produto();
                 Long id = rs.getLong("ID");
                 String nome = rs.getString("NOME");
-                Integer qd = rs.getInt("QUANTIDADE");
+                Long qd = rs.getLong("QUANTIDADE");
                 produto.setID(id);
                 produto.setNome(nome);
                 produto.setQuantidade(qd);
@@ -104,25 +104,25 @@ public class ProdutoDAO implements IProdutoDAO {
         } catch(Exception e) {
             throw e;
         } finally {
-            closeConnection(connection, stm, rs);
+            closeConnection(connexao, stm, rs);
         }
         return list;
     }
 
     @Override
-    public Integer update(Produto produto) throws Exception {
-        Connection connection = null;
+    public Long update(Produto produto) throws Exception {
+        Connection connexao = null;
         PreparedStatement stm = null;
         try {
-            connection = ConnectionFactory.getConnection();
+            connexao = ConnectionFactory.getConnection();
             String sql = getSqlUpdate();
-            stm = connection.prepareStatement(sql);
+            stm = connexao.prepareStatement(sql);
             adicionarParametrosUpdate(stm, produto);
-            return stm.executeUpdate();
+            return (long) stm.executeUpdate();
         } catch(Exception e) {
             throw e;
         } finally {
-            closeConnection(connection, stm, null);
+            closeConnection(connexao, stm, null);
         }
     }
 
@@ -183,7 +183,7 @@ public class ProdutoDAO implements IProdutoDAO {
     //metados de adicionar
     private void adicionarParametrosUpdate(PreparedStatement stm, Produto produto) throws SQLException {
         stm.setString(1, produto.getNome());
-        stm.setInt(2, produto.getQuantidade());
+        stm.setLong(2, produto.getQuantidade());
         stm.setLong(3, produto.getId());
     }
 
@@ -196,7 +196,7 @@ public class ProdutoDAO implements IProdutoDAO {
     }
 
     private void adicionarParametroInsert(PreparedStatement stm, Produto produto) throws SQLException {
-        stm.setInt(1, produto.getQuantidade());
-        stm.setString(2, produto.getNome());
+        stm.setString(1, produto.getNome());
+        stm.setLong(2, produto.getQuantidade());
     }
 }

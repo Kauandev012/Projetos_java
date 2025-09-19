@@ -10,9 +10,9 @@ public interface IClienteDAO {
 
     Cliente buscar(String codigo) throws Exception;
 
-    Integer excluir(Cliente clienteBD) throws Exception;
+    Integer excluir(Cliente cliente) throws Exception;
 
     List<Cliente> buscarTodos() throws Exception;
 
-    Integer update(Cliente clienteBD) throws Exception;
+    Integer update(Cliente cliente) throws Exception;
 }

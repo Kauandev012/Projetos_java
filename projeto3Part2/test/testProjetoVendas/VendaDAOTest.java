@@ -145,7 +145,7 @@ public class VendaDAOTest {
 
         assertTrue(vendaConsultada.getQuantidadeTotalProdutos() == 3);
         BigDecimal valorTotal = BigDecimal.valueOf(70).setScale(2, RoundingMode.HALF_DOWN);
-        assertTrue(vendaConsultada.getValorTotal().equals(valorTotal));
+        assertEquals(vendaConsultada.getValorTotal(), valorTotal);
         assertTrue(vendaConsultada.getStatus().equals(Venda.Status.INICIADA));
     }
 

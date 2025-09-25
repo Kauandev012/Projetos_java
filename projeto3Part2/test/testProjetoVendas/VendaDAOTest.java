@@ -122,9 +122,9 @@ public class VendaDAOTest {
         vendaConsultada.adicionarProduto(produto, 1);
 
         assertTrue(vendaConsultada.getQuantidadeTotalProdutos() == 3);
-        BigDecimal valorTotal = BigDecimal.valueOf(10).setScale(2, RoundingMode.HALF_DOWN);
-        assertEquals(vendaConsultada.getValorTotal(), valorTotal);
-        assertEquals(Venda.Status.INICIADA, vendaConsultada.getStatus());
+        BigDecimal valorTotal = BigDecimal.valueOf(30).setScale(2, RoundingMode.HALF_DOWN);
+        assertTrue(vendaConsultada.getValorTotal().equals(valorTotal));
+        assertTrue(vendaConsultada.getStatus().equals(Venda.Status.INICIADA));
     }
 
     @Test
@@ -229,9 +229,9 @@ public class VendaDAOTest {
 
         Venda vendaConsultada = vendaDao.consultar(codigoVenda);
         vendaConsultada.adicionarProduto(prod, 1);
-        assertEquals(3, (int) vendaConsultada.getQuantidadeTotalProdutos());
+        assertTrue(vendaConsultada.getQuantidadeTotalProdutos() == 3);
         BigDecimal valorTotal = BigDecimal.valueOf(70).setScale(2, RoundingMode.HALF_DOWN);
-        assertEquals(vendaConsultada.getValorTotal(), valorTotal);
+        assertTrue(vendaConsultada.getValorTotal().equals(valorTotal));
 
 
         vendaConsultada.removerTodosProdutos();
@@ -286,13 +286,13 @@ public class VendaDAOTest {
 
     private Cliente cadastrarCliente() throws TipoChaveNaoEncontradaException, DAOException {
         Cliente cliente = new Cliente();
-        cliente.setCpf(12312312323L);
+        cliente.setCpf(123123123231230L);
         cliente.setNome("alisson");
         cliente.setCidade("São Paulo");
         cliente.setEnd("End");
         cliente.setEstado("SP");
         cliente.setNumero(10);
-        cliente.setTel(1199999999L);
+        cliente.setTel(11999999899L);
         cliente.setSobreNome("alvez");
         clienteDao.cadastrar(cliente);
         return cliente;

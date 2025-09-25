@@ -40,7 +40,7 @@ public class ClienteDAOTest {
     @Test
     public void pesquisarCliente() throws MaisDeUmRegistroException, TableException, TipoChaveNaoEncontradaException, DAOException {
         Cliente cliente = new Cliente();
-        cliente.setCpf(12312312312L);
+        cliente.setCpf(123123123L);
         cliente.setNome("alisson");
         cliente.setCidade("São Paulo");
         cliente.setEnd("End");
